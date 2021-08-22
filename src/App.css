@@ -1,5 +1,20 @@
+@font-face {
+  font-family: PoppinsBlack;
+  src: url('./fonts/Poppins-Black.ttf') format(.ttf);
+}
+@font-face {
+  font-family: PoppinsLight;
+  src: url('./fonts/Poppins-Light.ttf') format();
+}
+
+:root {
+  --display-font:  PoppinsBlack;
+  --subdisplay-font:  PoppinsLight;
+}
+
 .App {
-  text-align: center;
+  /*text-align: center;*/
+  height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +50,92 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/*MY STYLES*/
+img { transition: all 300ms ease-in-out; }
+/*h1, h2 {  }*/
+
+/*
+* Utilities
+*/
+.none { 
+  display: none;
+  visibility: hidden;
+}
+.display {
+  display: initial;
+  visibility: visible;
+}
+.display, .none { transition: visibility 300ms ease; }
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+.horizontal { flex-direction: row; }
+
+.vertical { flex-direction: column; }
+
+.space-between { justify-content: space-between; }
+
+.justify-center { justify-content: center; }
+
+.small-gap { gap: 1rem; }
+
+.fit-width { width: 100%; }
+
+.fit-height { height: 100%; }
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
+.soft-padding { padding: 1rem; }
+
+.medium-padding { padding: 2rem; }
+
+.rounded { border-radius: 2rem;}
+
+.round { border-radius: 50%; }
+
+.font-display { font-family: var(--display-font); }
+
+.font-subdisplay { font-family: var(--subdiplay-font); }
+
+.italic { font-style: italic; }
+
+/*
+* Element styles
+*/
+.track-view img {
+  aspect-ratio:  1/1;
+}
+.icon-butt {
+
+}
+.control-butt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  transition: all 300ms ease;
+}
+.control-butt:hover {
+  background-color: #888;
+}
+.control-butt:hover i, .control-butt:focus i {
+  transform: scale(1.1);
+}
+.control-butt:active i {
+  transform: scale(0.9);
+}
+
+/*
+* Components
+*/
+#browser {
+  background-color: #333;
+  color:  #efefef;
 }
