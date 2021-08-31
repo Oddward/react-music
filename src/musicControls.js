@@ -1,6 +1,6 @@
 
 /* U t i l i t i e s */
-const formatTime = seconds => {
+export const formatTime = seconds => {
     let time = (seconds/60).toFixed(0).padStart(2, '0') + ':' + (seconds%60).toFixed(0).padStart(2, '0')
     // more than an hour?
     if (seconds >= 3600) time = (seconds/3600).toFixed(0).padStart(2, '0') + ':' + time
@@ -8,4 +8,4 @@ const formatTime = seconds => {
     return time
 }
 
-export default music-controls
+export default musicControls

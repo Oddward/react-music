@@ -51,15 +51,17 @@ Playlist:
 - The home screen of the app should be the Now Playing view (not the library views as per usual)
 - Cover art visible (prominently) at all times, as its dominant colour is used for UI accent
 	- might be replaced with artist avatar when viewing artist
-- Playback seekbar is a waveform when it can be rendered, otherwise regular seekbar
-- Playback visualization (always visible when rendered?)
+- Playback seekbar is a waveform when it can be successfully loaded
+- Playback visualization (always visible?)
 
 ## UI structure
 
 High level component hierarchy/composition (based on mockups)
 
-> *mockup here*
-<!-- ()[/notes/] -->
+<img src="Now playing.png" width="70%" alt="Wide mockup of now playing screen" />
+<img src="Now playing - slim.png" width="17.5%" alt="Thin mockup of now playing screen" />
+
+> Mockups of *Now Playing* view when widescreen & when thin/snapped to the side
 
 - App
 	- titlebar/app header
@@ -69,7 +71,8 @@ High level component hierarchy/composition (based on mockups)
 		- cover art area
 			- cover art | artist avatar (when viewing artist)
 			- [track details]
-		- page
+				> visible outside of Now Playing view
+		- library || visualizer
 			- nav
 			- results/lists
 	- controls
@@ -81,3 +84,9 @@ High level component hierarchy/composition (based on mockups)
 			- volume
 			- now playing list
 			- full screen (?)
+
+## Web technologies
+
+- wavesurfer.js
+- wave.js
+- web audio API
