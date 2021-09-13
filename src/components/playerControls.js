@@ -12,13 +12,13 @@ import {
 } from '@heroicons/react/solid'
 
 const Visual = React.forwardRef(
-    function Visual( props ) {
+    function Visual( props, ref ) {
       const [visual] = useState( new Wave() )
       const canvasRef = useRef() 
   
       useEffect( () => {
         // const visual = new Wave() 
-        visual.fromElement( props.audio.current.id, canvasRef.current.id, props.options )
+        visual.fromElement( ref.id, canvasRef.current.id, props.options )
       })
   
       return(
@@ -36,7 +36,9 @@ const Visual = React.forwardRef(
 function PlayerControls( props ) {
   // static contextType = nowPlayingContext
 
-  // const audioRef = React.createRef()
+  // const audioRef = React.createRef( new AudioContext() )
+  const audioCtx = new AudioContext()
+  const audioElRef = React.createRef()
   const waveformRef = React.createRef()
   const getWaveform = useCallback( ref => {
     if (!waveformRef.current && ref) {
@@ -51,32 +53,34 @@ function PlayerControls( props ) {
         responsive: true,
         hideScrollbar: true,
         normalize: false,
-        backend: 'MediaElementWebAudio'
+        audioContext: audioCtx,
+        backend: 'MediaElement'
         // other options
       });
     }
     return waveformRef.current;
   }, []);
   // visualRef = React.createRef()
-  // Nice visual types: wave, shockwave, flower
-  // options = { type: 'wave', colors: ['red','white'] }
+  /*
+   * Nice visual types: wave | shockwave | flower
+   */
+  const options = { type: 'wave', colors: ['red','yellow'] }
   const [volume, setVolume] = useState( .5 )
   const [loop, setLoop] = useState( 'off' )
   const [mute, setMute] = useState( false )
 
   useEffect(() => {
     getWaveform().on("finish", handleEnd);
+    getWaveform().backend.id = "audio-el"
+    audioElRef.current = getWaveform().backend
+
     return () => getWaveform().destroy();
   }, [getWaveform]);
 
   useEffect(() => {
-    getWaveform().load(props.file);
+    getWaveform().load( props.file );
+    if (props.isPlaying) play()
   }, [getWaveform, props.file]);
-
-  // const loadTrack = () => {
-    
-  //   // state.visual.fromElement
-  // }
 
   const play = () => { 
     getWaveform().play()
@@ -116,10 +120,7 @@ function PlayerControls( props ) {
 
   const skipNext = () => {
     if (props.index < props.lastIndex) {
-      pause()
       props.changeIndex( props.index + 1 )
-      // loadTrack()
-      // play()
     }
   }
 
@@ -127,8 +128,6 @@ function PlayerControls( props ) {
     if (props.index > 0) {
       pause()
       props.changeIndex( props.index - 1 )
-      // loadTrack()
-      // play()
     } else {
       getWaveform().stop()
     }
@@ -153,7 +152,8 @@ function PlayerControls( props ) {
         style={{position:'absolute', bottom: '200px', left:'calc(40vmin + 2rem)', width:'calc(100vmax - (40vmin + 3rem))'}}
         ref={visualRef} >
       </canvas> */}
-      {/* <Visual audio={props.waveformRef.getAudio()} options={options} /> */}
+      {/* <audio id="audio" ref={audioElRef} src="" crossOrigin=""/> */}
+      <Visual ref={audioElRef} options={options} />
       <div className="flex horizontal space-between small-gap soft-padding" style={{alignItems: 'center'}}>
         <span>{props.bitrate}kb/s</span>
         <div id="waveform" ref={getWaveform} className="fit-width" />

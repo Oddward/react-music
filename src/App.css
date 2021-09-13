@@ -30,7 +30,6 @@
 
 /* .App-header { font-size: calc(10px + 2vmin); } */
 
-img { transition: all 300ms ease-in-out; }
 button {
   border: none;
   background: none;
@@ -50,6 +49,7 @@ h1, h2 { margin: 0; }
   visibility: visible;
 }
 .display, .none { transition: visibility 300ms ease; }
+.animated { transition: all 300ms ease-in-out; }
 
 .flex {
   display: flex;

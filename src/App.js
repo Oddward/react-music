@@ -36,16 +36,12 @@ function App() {
   // const audioRef = useRef();
   const tracks = [...trackList]
 
-  const [isNowPlayingView, toggleNowPlayingView] = useState( false )
+  const [isFocusedNowPlaying, toggleFocusNowPlaying] = useState( false )
+  const value= {isFocusedNowPlaying, toggleFocusNowPlaying}
+
   const [currentList, setCurrentList] = useState( tracks )
   const [index, changeIndex] = useState( 0 )
-  // const [currentTrack, setCurrentTrack] = useState( currentList[index] )
   const [isPlaying, toggleIsPlaying] = useState( false )
-  
-  // const lastIndex = useRef(null)
-  // useEffect(() => {
-  //   lastIndex.current = currentList.length
-  // })
 
   // const handleSkip = str => {
   //   if (str === 'prev') {
@@ -62,14 +58,14 @@ function App() {
   // }
 
   return (
-    <NowPlayingContext.Provider value={ false }>
+    <NowPlayingContext.Provider value={ value }>
     <div className="App flex vertical space-between">
       <header className="flex horizontal space-between">
         <p className="font-display soft-padding" style={{margin: '0'}}
-        onClick={() => toggleNowPlayingView(!isNowPlayingView)}>
+        onClick={() => toggleFocusNowPlaying(!isFocusedNowPlaying)}>
           Hyacin<span className="font-subdisplay italic">
-            {NowPlayingContext.value ? ' — Enjoy Listening' : ' — Build your nest'}
-            </span> {index}
+            {value.isFocusedNowPlaying ? ' — Enjoy Listening' : ' — Build your nest'}
+            </span>
         </p>
       </header>
       {/* <audio ref={audioRef} src={currentTrack.file}></audio> */}

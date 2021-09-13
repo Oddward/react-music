@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useContext, useEffect, useRef, useState} from 'react';
 import {NowPlayingContext} from '../context.js'
 import { 
     PlayIcon,
@@ -74,33 +74,44 @@ function Visualizer( props ) {
     )
 }
 
-class PlayerViewer extends React.Component {
-    render() {
+function PlayerViewer ( props ) {
+    const { isFocusedNowPlaying, toggleFocusNowPlaying } = useContext( NowPlayingContext )
+    // render() { 
         return(
+            <>
+            {/* // <NowPlayingContext.Consumer>  */}
+            {/* {({ isFocusedNowPlaying, toggleFocusNowPlayng }) => (  */}
             <div className="flex horizontal space-between fit-height soft-padding small-gap">
                 <div className="flex vertical small-gap">
                     <img 
-                        src={this.props.currentList[this.props.index].cover} 
+                        src={props.currentList[props.index].cover} 
                         alt="Album cover" 
-                        className="rounded"
-                        onClick={() => NowPlayingContext.value = !NowPlayingContext.value}
+                        className="rounded animated"
+                        onClick={() => toggleFocusNowPlaying( !isFocusedNowPlaying )}
                         style={{
-                            width: '40vmin',
+                            width: isFocusedNowPlaying ? '64vmin' : '40vmin',
                             height: 'auto',
                             cursor: 'pointer'
                         }} />
-                    <div style={{textOverflow: 'clip'}} className="soft-side-padding">
-                        <h1 className="font-display">{this.props.currentList[this.props.index].title}</h1>
-                        <h2 className="font-subdisplay italic">{this.props.currentList[this.props.index].artist}</h2>
+                    <div className="soft-side-padding animated"
+                        style={{
+                            textOverflow: 'clip',
+                            fontSize: isFocusedNowPlaying ? '0' : 'unset',
+                            marginTop: isFocusedNowPlaying ? '-1rem' : '0rem'
+                        }}>
+                        <h1 className="font-display">{props.currentList[props.index].title}</h1>
+                        <h2 className="font-subdisplay italic">{props.currentList[props.index].artist}</h2>
                     </div>
                 </div>
                 <ViewerBox>
-                    <Browser items={this.props.currentList} />
+                    <Browser items={props.currentList} />
                 </ViewerBox>
-            </div>
+            </div>)
+            {/* } */}
+            {/* </NowPlayingContext.Consumer>  */}
+            </>
         )
-    }
+    // } 
 }
-PlayerViewer.contextType = NowPlayingContext
 
 export default PlayerViewer
