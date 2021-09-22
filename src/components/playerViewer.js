@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useRef, useState} from 'react';
+import React, { useContext} from 'react';
 import {NowPlayingContext} from '../context.js'
 import { 
-    PlayIcon,
+    // PlayIcon,
     SearchIcon, 
     DotsVerticalIcon,
     MusicNoteIcon,
@@ -76,42 +76,35 @@ function Visualizer( props ) {
 
 function PlayerViewer ( props ) {
     const { isFocusedNowPlaying, toggleFocusNowPlaying } = useContext( NowPlayingContext )
-    // render() { 
-        return(
-            <>
-            {/* // <NowPlayingContext.Consumer>  */}
-            {/* {({ isFocusedNowPlaying, toggleFocusNowPlayng }) => (  */}
-            <div className="flex horizontal space-between fit-height soft-padding small-gap">
-                <div className="flex vertical small-gap">
-                    <img 
-                        src={props.currentList[props.index].cover} 
-                        alt="Album cover" 
-                        className="rounded animated"
-                        onClick={() => toggleFocusNowPlaying( !isFocusedNowPlaying )}
-                        style={{
-                            width: isFocusedNowPlaying ? '64vmin' : '40vmin',
-                            height: 'auto',
-                            cursor: 'pointer'
-                        }} />
-                    <div className="soft-side-padding animated"
-                        style={{
-                            textOverflow: 'clip',
-                            fontSize: isFocusedNowPlaying ? '0' : 'unset',
-                            marginTop: isFocusedNowPlaying ? '-1rem' : '0rem'
-                        }}>
-                        <h1 className="font-display">{props.currentList[props.index].title}</h1>
-                        <h2 className="font-subdisplay italic">{props.currentList[props.index].artist}</h2>
-                    </div>
+    
+    return(
+        <div className="flex horizontal space-between fit-height soft-padding small-gap">
+            <div className="flex vertical small-gap">
+                <img 
+                    src={props.currentList[props.index].cover} 
+                    alt="Album cover" 
+                    className="rounded animated"
+                    onClick={() => toggleFocusNowPlaying( !isFocusedNowPlaying )}
+                    style={{
+                        width: isFocusedNowPlaying ? '64vmin' : '40vmin',
+                        height: 'auto',
+                        cursor: 'pointer'
+                    }} />
+                <div className="soft-side-padding animated"
+                    style={{
+                        textOverflow: 'clip',
+                        fontSize: isFocusedNowPlaying ? '0' : 'unset',
+                        marginTop: isFocusedNowPlaying ? '-1rem' : '0rem'
+                    }}>
+                    <h1 className="font-display">{props.currentList[props.index].title}</h1>
+                    <h2 className="font-subdisplay italic">{props.currentList[props.index].artist}</h2>
                 </div>
-                <ViewerBox>
-                    <Browser items={props.currentList} />
-                </ViewerBox>
-            </div>)
-            {/* } */}
-            {/* </NowPlayingContext.Consumer>  */}
-            </>
-        )
-    // } 
+            </div>
+            <ViewerBox>
+                <Browser items={props.currentList} />
+            </ViewerBox>
+        </div>
+    )
 }
 
 export default PlayerViewer

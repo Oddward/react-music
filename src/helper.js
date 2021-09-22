@@ -1,5 +1,4 @@
 
-
 /* U t i l i t i e s */
 export const formatTime = seconds => {
     let time = (seconds/60).toFixed(0).padStart(2, '0') + ':' + (seconds%60).toFixed(0).padStart(2, '0')
@@ -9,6 +8,10 @@ export const formatTime = seconds => {
     return time
 }
 
+export const playbackPercent = ( seconds, duration ) => {
+    let percent = seconds/duration * 100
 
+    return percent
+}
 
 // export default musicControls

@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useState} from 'react';
 // import ReactHowler from 'react-howler'
 
 import {NowPlayingContext} from './context.js'
@@ -14,7 +14,7 @@ const trackList = [
     "artist": "Kai Engel", 
     "album": "Satin", 
     "file": "/Kai_Engel_-_04_-_Sentinel.mp3",
-    "duration": "3:50",
+    "duration": 183,
     "cover": "/a4124344313_10.jpg",
     "main_colour": "orange",
     "metadata": {"size":3876, "mimetype":"MP3", "bitrate":'320', "trackNo":"1", "year":"2021"}
@@ -24,7 +24,7 @@ const trackList = [
     "artist": "Blue Dot Sessions", 
     "album": "", 
     "file": "/Blue_Dot_Sessions_-_I_Recall.mp3",
-    "duration": "4:20",
+    "duration": 301,
     "cover": "/bluedotsessions-irecall.jpg",
     "main_colour": "orange",
     "metadata": {"size":3876, "mimetype":"MP3", "bitrate":'192', "trackNo":"1", "year":"2021"}
@@ -42,20 +42,6 @@ function App() {
   const [currentList, setCurrentList] = useState( tracks )
   const [index, changeIndex] = useState( 0 )
   const [isPlaying, toggleIsPlaying] = useState( false )
-
-  // const handleSkip = str => {
-  //   if (str === 'prev') {
-  //     if (index === 0) {
-  //       setSeek( 0.0 )
-  //     } else {
-  //       changeIndex( index - 1 )
-  //     }
-  //   } else if (str === 'next') {
-  //     if (index < currentList.length - 1) {
-  //       changeIndex( index + 1 )
-  //     }
-  //   }
-  // }
 
   return (
     <NowPlayingContext.Provider value={ value }>
